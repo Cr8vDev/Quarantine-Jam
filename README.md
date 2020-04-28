@@ -2,7 +2,7 @@
 
 ### Core Gameplay Mechanics
 - Arena Game
-- Need to save people in houses, enemy chansing the player
+- Need to save people in houses, enemy chasing the player
 - 
 
 ### Images sizes to sprites
