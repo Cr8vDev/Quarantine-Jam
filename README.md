@@ -5,6 +5,9 @@
 - Need to save people in houses, enemy chansing the player
 - 
 
+### Images sizes to sprites
+64x64
+
 ### Theme
 - TBA
 
