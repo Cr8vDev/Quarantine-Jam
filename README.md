@@ -1,12 +1,12 @@
 # work in progress
 
+### Core Gameplay Mechanics
+- Arena Game
+- Need to save people in houses, enemy chansing the player
+- 
+
 ### Theme
 - TBA
-
-### Core Gameplay Mechanics
-- a
-- b
-- c
 
 ### The elevator Pitch
 this is a game where the player have to...
