@@ -50,6 +50,9 @@ TextureImporter:
   - first:
       213: 490050971821090341
     second: spritesforyou_13
+  - first:
+      213: -982273555142013712
+    second: spritesforyou_14
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -415,7 +418,7 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -423,6 +426,27 @@ TextureImporter:
       bones: []
       spriteID: 5262b3133c20dc600800000000000000
       internalID: 490050971821090341
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesforyou_14
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0fc0089e7634e52f0800000000000000
+      internalID: -982273555142013712
       vertices: []
       indices: 
       edges: []
