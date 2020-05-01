@@ -4,7 +4,8 @@ namespace Objects
 {
   public class Player : Character
   {
-    [SerializeField] public float speed = 8f;
+    [SerializeField] public float speed = 15f;
+    [SerializeField] public float speedUp = 20f;
     private float horizontal;
     private float vertical;
 
@@ -19,6 +20,11 @@ namespace Objects
     {
       horizontal = Input.GetAxisRaw("Horizontal");
       vertical = Input.GetAxisRaw("Vertical");
+
+      if (Input.GetKeyDown(KeyCode.Space))
+      {
+        body.velocity += Vector2.up * speedUp;
+      }
 
       Brake();
     }
