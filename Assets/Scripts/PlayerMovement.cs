@@ -80,13 +80,13 @@ public class PlayerMovement : MonoBehaviour
     {
         rb2d.velocity = (new Vector2(speed * xDir, speed * yDir) * Time.deltaTime);
 
-        if(xDir < 0f)
+        if (xDir < 0f)
         {
             if (Mathf.Approximately(yDir, 0f))
             {
                 currentDirection = CurrentDirection.West;
             }
-            else if(yDir > 0f)
+            else if (yDir > 0f)
             {
                 currentDirection = CurrentDirection.NorthWest;
             }
@@ -95,7 +95,7 @@ public class PlayerMovement : MonoBehaviour
                 currentDirection = CurrentDirection.SouthWest;
             }
         }
-        else if(xDir > 0f)
+        else if (xDir > 0f)
         {
             if (Mathf.Approximately(yDir, 0f))
             {
