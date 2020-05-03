@@ -9,6 +9,8 @@ public class PlayerTriggersItem : MonoBehaviour
     [SerializeField]
     private Rigidbody2D rb2d;
 
+
+
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (!stackItem.IsStacked())
@@ -19,6 +21,8 @@ public class PlayerTriggersItem : MonoBehaviour
             }
         }
     }
+
+
 
     private void OnTriggerExit2D(Collider2D collision)
     {

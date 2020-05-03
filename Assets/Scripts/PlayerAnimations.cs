@@ -8,6 +8,8 @@ public enum ReferenceDirection
     Right
 }
 
+
+
 public class PlayerAnimations : MonoBehaviour
 {
     [SerializeField]

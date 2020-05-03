@@ -12,6 +12,8 @@ public class BaseStack : MonoBehaviour
     [SerializeField]
     private Transform resetPosition;
 
+
+
     private void Awake()
     {
         stackPositions.Add(transform);
@@ -22,10 +24,21 @@ public class BaseStack : MonoBehaviour
         }
     }
 
+
+
+    public Transform GetPeakItem()
+    {
+        return stackedObjects[stackedObjects.Count - 1].GetChild(1);
+    }
+
+
+
     public int GetStackObjectsCount()
     {
         return stackedObjects.Count;
     }
+
+
 
     public void Stack(Transform addObject)
     {
@@ -35,6 +48,8 @@ public class BaseStack : MonoBehaviour
 
         nextBlockToStackOn++;
     }
+
+
 
     public void Pop()
     {

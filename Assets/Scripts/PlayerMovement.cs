@@ -33,6 +33,9 @@ public class PlayerMovement : MonoBehaviour
 
     private CurrentDirection currentDirection;
 
+    [SerializeField]
+    private PlayerAction playerAction;
+
 
 
     private void Start()
@@ -78,7 +81,14 @@ public class PlayerMovement : MonoBehaviour
 
     public void MovementTopDown(float xDir, float yDir)
     {
-        rb2d.velocity = (new Vector2(speed * xDir, speed * yDir) * Time.deltaTime);
+        if (playerAction.GetPlayerAction() == Action.FreeRoam)
+        {
+            rb2d.velocity = (new Vector2(speed * xDir, speed * yDir) * Time.deltaTime);
+        }
+        else
+        {
+            Idle();
+        }
 
         if (xDir < 0f)
         {

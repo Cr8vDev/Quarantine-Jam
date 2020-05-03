@@ -8,6 +8,11 @@ public class PlayerInput : MonoBehaviour
     private PlayerMovement playerMovement;
     [SerializeField]
     private PlayerAnimations playerAnimations;
+    [SerializeField]
+    private PlayerInteract playerInteract;
+
+    [SerializeField]
+    private PlayerAction playerAction;
 
 
     [SerializeField]
@@ -74,6 +79,38 @@ public class PlayerInput : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 playerMovement.Jump();
+            }
+        }
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            playerInteract.PopItem();
+        }
+
+
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            playerInteract.StackItem();
+        }
+
+
+
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            if (playerAction.GetPlayerAction() == Action.FreeRoam)
+            {
+                if (playerInteract.IsClimable())
+                {
+                    playerAction.ClimbUp();
+                }
+            }
+            else
+            {
+                playerAction.ClimbDown();
             }
         }
     }
