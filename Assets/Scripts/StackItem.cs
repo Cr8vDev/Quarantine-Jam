@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
 
 public class StackItem : MonoBehaviour
 {
@@ -10,14 +9,13 @@ public class StackItem : MonoBehaviour
 
     private bool isStacked = false;
 
-    [SerializeField]
-    private GameObject pressE;
-    [SerializeField]
-    private TextMeshProUGUI tmPro;
-
     private bool inputE = false;
 
     private BaseStack baseStack;
+
+    private bool isOnPlatform = false;
+
+    private string colliderName = "";
 
     public bool IsStacked()
     {
@@ -34,6 +32,16 @@ public class StackItem : MonoBehaviour
         isStacked = true;
     }
 
+    public bool IsOnPlatform()
+    {
+        return isOnPlatform;
+    }
+
+    public string GetColliderName()
+    {
+        return colliderName;
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (!IsStacked())
@@ -41,9 +49,8 @@ public class StackItem : MonoBehaviour
             if (collision.tag[0] == '2')
             {
                 baseStack = collision.GetComponent<BaseStack>();
-
-                tmPro.text = "Press E To Stack To " + collision.name;
-                pressE.SetActive(true);
+                isOnPlatform = true;
+                colliderName = collision.name;
             }
         }
     }
@@ -52,22 +59,20 @@ public class StackItem : MonoBehaviour
     {
         if (collision.tag[0] == '2')
         {
-            pressE.SetActive(false);
+            baseStack = null;
+            isOnPlatform = false;
+            colliderName = "";
         }
     }
 
-    private void Update()
+    public void SetItemOnStack()
     {
-        if (Input.GetKey(KeyCode.E))
+        if (baseStack != null)
         {
-            if (baseStack != null)
-            {
-                baseStack.Stack(transform);
-                rb2d.bodyType = RigidbodyType2D.Kinematic;
-                AddToStack();
-                pressE.SetActive(false);
-                baseStack = null;
-            }
+            baseStack.Stack(transform);
+            rb2d.bodyType = RigidbodyType2D.Kinematic;
+            AddToStack();
+            baseStack = null;
         }
     }
 }
