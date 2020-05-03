@@ -1,45 +1,73 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class StackItem : MonoBehaviour
 {
-    private Transform collisionObject;
-    private bool isStackable = false;
-    private StackItem itemStacked;
+    [SerializeField]
+    private Rigidbody2D rb2d;
 
-    public void SetStackItem(StackItem sItemStacked)
+    private bool isStacked = false;
+
+    [SerializeField]
+    private GameObject pressE;
+    [SerializeField]
+    private TextMeshProUGUI tmPro;
+
+    private bool inputE = false;
+
+    private BaseStack baseStack;
+
+    public bool IsStacked()
     {
-        itemStacked = sItemStacked;
+        return isStacked;
     }
 
-    public void Stack()
+    public void RemoveFromStack()
     {
-        collisionObject.transform.parent.GetComponent<StackItem>().SetStackItem(this);
-        GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
-        transform.position = collisionObject.position + new Vector3(0f, 0.15f, 0f);
+        isStacked = false;
     }
 
-    public bool IsStackable()
+    private void AddToStack()
     {
-        return isStackable;
+        isStacked = true;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag[0] == '1' && collision.tag[1] == '0')
+        if (!IsStacked())
         {
-            collisionObject = collision.transform;
-            isStackable = true;
+            if (collision.tag[0] == '2')
+            {
+                baseStack = collision.GetComponent<BaseStack>();
+
+                tmPro.text = "Press E To Stack To " + collision.name;
+                pressE.SetActive(true);
+            }
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.tag[0] == '1' && collision.tag[1] == '0')
+        if (collision.tag[0] == '2')
         {
-            collisionObject = null;
-            isStackable = false;
+            pressE.SetActive(false);
+        }
+    }
+
+    private void Update()
+    {
+        if (Input.GetKey(KeyCode.E))
+        {
+            if (baseStack != null)
+            {
+                baseStack.Stack(transform);
+                rb2d.bodyType = RigidbodyType2D.Kinematic;
+                AddToStack();
+                pressE.SetActive(false);
+                baseStack = null;
+            }
         }
     }
 }

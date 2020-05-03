@@ -5,13 +5,13 @@ using UnityEngine;
 public class PushItem : MonoBehaviour
 {
     [SerializeField]
-    private float interactableCarryDistance;
+    private GameObject popStack;
 
-    private Transform colliderObject;
-
-    private bool isCarryingInteractable = false;
+    private BaseStack baseStack;
 
     private PlayerMovement playerMovement;
+
+    private bool inputF = false;
 
     private void Start()
     {
@@ -20,37 +20,39 @@ public class PushItem : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag[0] == '1' && collision.tag[1] == '0')
+        if(collision.tag[0] == '2')
         {
-            colliderObject = collision.transform.parent;
+            if (collision.GetComponent<BaseStack>().GetStackObjectsCount() > 0)
+            {
+                popStack.SetActive(true);
 
-            colliderObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
+                baseStack = collision.GetComponent<BaseStack>();
+            }
+            else
+            {
+                popStack.SetActive(false);
+            }
         }
     }
 
-
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.tag[0] == '1' && collision.tag[1] == '0')
+        if (collision.tag[0] == '2')
         {
-            colliderObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
+            popStack.SetActive(false);
 
-            colliderObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0f, 0f);
-
-            colliderObject = null;
+            baseStack = null;
         }
     }
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.F))
         {
-            if(colliderObject.GetComponent<StackItem>() != null)
+            if (baseStack != null)
             {
-                if(colliderObject.GetComponent<StackItem>().IsStackable())
-                {
-                    colliderObject.GetComponent<StackItem>().Stack();
-                }
+                baseStack.Pop();
+                popStack.SetActive(false);
             }
         }
     }
